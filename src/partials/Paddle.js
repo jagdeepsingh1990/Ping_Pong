@@ -11,6 +11,7 @@ export class Paddle {
     this.down = down;
     this.speed = 10;
     this.score = 0;
+
     document.addEventListener('keydown', event => {
         switch(event.key){
             case this.up:
@@ -21,6 +22,19 @@ export class Paddle {
             break;
         }
     })
+  }
+  increaseScore(){
+    this.score += 1;
+  }
+  getScore(){
+    return this.score;
+  }
+  coordinates(){
+    const leftX = this.x;
+    const rightX = this.x + this.width;
+    const topY = this.y;
+    const bottomY = this.y + this.height;
+    return [leftX, rightX, topY, bottomY];
   }
   render(svg) {
     let rect = document.createElementNS(SVG_NS, 'rect');
