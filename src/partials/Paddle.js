@@ -14,7 +14,7 @@ export class Paddle {
     document.addEventListener('keydown', event => {
         switch(event.key){
             case this.up:
-            this.y = Math.max(0, this.y - this.speed);
+            this.y = Math.max(4, this.y - this.speed);
             break;
             case this.down:
             this.y = Math.min(this.boardHeight - this.height, this.y + this.speed);

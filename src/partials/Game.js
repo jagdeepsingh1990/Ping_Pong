@@ -32,8 +32,12 @@ export default class Game {
 	);
 
 		document.addEventListener("keydown", event => {
-				console.log(event);
-				this.pause = !this.pause;
+				switch(event.key){
+					case KEYS.space:
+					this.pause = !this.pause;
+					break;
+				}
+				
 		});
   }
 
