@@ -3,9 +3,10 @@ const path = require('path');
 const resolve = require('path').resolve;
 const src = resolve(__dirname, 'src');
 const build = resolve(__dirname, 'build');
-const OpenBrowserPlugin = require('open-browser-webpack-plugin');
+// const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 module.exports = {
+	mode: 'development',
 	entry: {
 		app: './src/index.js',
 	},
@@ -59,10 +60,11 @@ module.exports = {
 			aggregateTimeout: 300,
 			poll: 1000,
 			ignored: /node_modules/
-		}
+		},
+	
 	},
 
 	plugins: [
-		new OpenBrowserPlugin({ url: 'http://localhost:3000/' }),
+		// new OpenBrowserPlugin({ url: 'http://localhost:3000/' }),
 	]
 };
