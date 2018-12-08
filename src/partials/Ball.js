@@ -31,22 +31,25 @@ export class Ball {
             
         }else if (hitLeft || hitRight){
             this.vx *= -1;
-            this.reset()
+            
             this.goal.play();
             if (hitLeft) {
-                paddle2.increaseScore();
+                this.hitGoal(paddle2)
             }else {
-                paddle1.increaseScore();
+                this.hitGoal(paddle1)
             }
         }
     }
-
+    hitGoal(paddle){
+        paddle.score++;
+        this.reset();
+    }
     paddleCollision(paddle1, paddle2) {
         if (this.vx > 0) {
             const [left, right, top, bottom] = paddle2.coordinates();
             const hit = (this.x + this.radius > left) && (this.y <= bottom) && (this.y >= top)
             if (hit) {
-                this.vx *= -1 * 1.2;
+                this.vx *= -1 * 1.1;
                 this.ping.play();
             }
         } else {
@@ -54,7 +57,7 @@ export class Ball {
             const hit = (this.x - this.radius <= right) && (this.y <= bottom) && (this.y >= top);
 
             if (hit) {
-                this.vx *= -1 * 1.2;
+                this.vx *= -1 * 1.1;
                 this.pong.play()
             }
         }
@@ -75,8 +78,8 @@ export class Ball {
     circle.setAttributeNS(null, 'cy', this.y);
     circle.setAttributeNS(null, 'fill', 'white');
     this.wallCollision(paddle1, paddle2);
-    this.x = this.x + this.vx;
-    this.y = this.y + this.vy;
+    this.x += this.vx;
+    this.y += this.vy;
     this.paddleCollision(paddle1, paddle2);
     svg.appendChild(circle);
     }

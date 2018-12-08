@@ -20,7 +20,9 @@ export default class Game {
 	this.gameElement = document.getElementById(this.element);
 	this.board = new Board(this.width, this.height);
     //bal instantiator
-    this.ball = new Ball(this.radius, this.width, this.height);
+	this.ball = new Ball(this.radius, this.width, this.height);
+	this.ballThree = new Ball(this.radius, this.width, this.height);
+	this.ballTwo = new Ball(this.radius, this.width, this.height);
 
     this.paddleOne = new Paddle(this.height,this.paddleWidth,this.paddleHeight,this.boardGap,((this.height - this.paddleHeight) / 2), KEYS.a, KEYS.z
 	);
@@ -48,6 +50,7 @@ export default class Game {
 
   render() {
 	if (this.pause) {
+		
 		return;
 	}
 	this.gameElement.innerHTML = '';
@@ -61,9 +64,18 @@ export default class Game {
 	this.paddleOne.render(svg, this.paddleTwo);
 	this.paddleTwo.render(svg), this.paddleOne;
 	this.ball.render(svg, this.paddleOne, this.paddleTwo);
+	this.ballTwo.render(svg, this.paddleOne, this.paddleTwo);
+	this.ballThree.render(svg, this.paddleOne, this.paddleTwo);
 
-	this.score1.render(svg, this.paddleOne.getScore());
-	this.score2.render(svg, this.paddleTwo.getScore());
+	this.score1.render(svg, this.paddleOne.score);
+	this.score2.render(svg, this.paddleTwo.score);
 
+	if ((this.paddleOne.score === 4) || (this.paddleTwo.score === 4)) {
+		
+		this.paddleOne.score = 0;
+		this.paddleTwo.score = 0;
+		this.pause = true;
+	}
+	
   }
 }
