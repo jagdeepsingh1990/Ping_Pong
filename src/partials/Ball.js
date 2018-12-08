@@ -8,7 +8,9 @@ export class Ball {
         this.space = space;
         this.direction = 1;
 
-
+        this.pong = new Audio('../../public/sounds/pong-01.wav')
+        this.ping = new Audio('../../public/sounds/pong-02.wav')
+        this.goal = new Audio('../../public/sounds/pong-04.wav')
         this.reset();
         document.addEventListener('keydown', event => {
             switch(event.key){
@@ -26,9 +28,11 @@ export class Ball {
         
         if (hitTop || hitBottom) {
             this.vy *= -1;
+            
         }else if (hitLeft || hitRight){
             this.vx *= -1;
             this.reset()
+            this.goal.play();
             if (hitLeft) {
                 paddle2.increaseScore();
             }else {
@@ -42,14 +46,16 @@ export class Ball {
             const [left, right, top, bottom] = paddle2.coordinates();
             const hit = (this.x + this.radius > left) && (this.y <= bottom) && (this.y >= top)
             if (hit) {
-                this.vx *= -1;
+                this.vx *= -1 * 1.2;
+                this.ping.play();
             }
         } else {
             const [left, right, top, bottom] = paddle1.coordinates();
             const hit = (this.x - this.radius <= right) && (this.y <= bottom) && (this.y >= top);
 
             if (hit) {
-                this.vx *= -1;
+                this.vx *= -1 * 1.2;
+                this.pong.play()
             }
         }
     }
