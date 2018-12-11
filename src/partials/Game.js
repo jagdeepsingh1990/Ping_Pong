@@ -21,12 +21,10 @@ export default class Game {
 
     this.gameElement = document.getElementById(this.element);
     this.board = new Board(this.width, this.height);
-    //bal instantiator
     this.ball = new Ball(this.radius, this.width, this.height);
     this.ballTwo = new Ball(this.radius, this.width, this.height);
     this.ballThree = new Ball(this.radius, this.width, this.height);
-    
-
+  
     this.paddleOne = new Paddle(
       this.height,
       this.paddleWidth,
