@@ -50,7 +50,7 @@ export class Ball {
       const hit =
         this.x + this.radius > left && this.y <= bottom && this.y >= top;
       if (hit) {
-        this.vx *= -1 * 1;
+        this.vx *= -1 * 1.1;
         this.ping.play();
       }
     } else {
@@ -59,7 +59,7 @@ export class Ball {
         this.x - this.radius <= right && this.y <= bottom && this.y >= top;
 
       if (hit) {
-        this.vx *= -1 * 1;
+        this.vx *= -1 * 1.1;
         this.pong.play();
       }
     }
