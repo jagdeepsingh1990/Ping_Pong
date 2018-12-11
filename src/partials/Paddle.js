@@ -13,16 +13,7 @@ export class Paddle {
     this.score = 0;
 
     document.addEventListener('keydown', event => {
-      if (event.key === KEYS.x) {
-        if (this.height >= 30) {
-          this.height = this.height * 0.91;
-        }
-      }
-      if (event.key === KEYS.l) {
-        if (this.height <= 70) {
-          this.height = this.height * 1.1;
-        }
-      }
+      
 
       switch (event.key) {
         case this.up:
@@ -37,6 +28,10 @@ export class Paddle {
       }
     });
   }
+
+increasHeight(){
+  this.height += 10;
+}
 
   coordinates() {
     const leftX = this.x;

@@ -14,6 +14,6 @@ export class Score {
         text.setAttributeNS(null, 'font-size', this.size);
         text.setAttributeNS(null, 'font-family', '"Silkscreen Web", monotype');
         text.textContent = score;
-    svg.appendChild(text);  
+        svg.appendChild(text);  
     }
 }

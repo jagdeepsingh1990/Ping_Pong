@@ -4,6 +4,7 @@ import { Paddle } from './Paddle';
 import { Ball } from './Ball';
 import { Score } from './Score';
 import { Winner } from './Winner';
+import { Shoot } from './Shoot';
 
 export default class Game {
   constructor(element, width, height) {
@@ -46,7 +47,9 @@ export default class Game {
     );
 
     this.score1 = new Score(this.width / 4, 30, this.scoreFontSize);
-    this.score2 = new Score(3 * (this.width / 4), 30, this.scoreFontSize);
+	this.score2 = new Score(3 * (this.width / 4), 30, this.scoreFontSize);
+	this.shoot = new Shoot(12, KEYS.s, KEYS.w, this.paddleOne, this.paddleTwo)
+	
     this.winner = new Winner(
       120,
       this.height / 2 - 40,
@@ -91,21 +94,31 @@ export default class Game {
     this.paddleTwo.render(svg, this.paddleOne);
     this.ball.render(svg, this.paddleOne, this.paddleTwo);
     this.ballTwo.render(svg, this.paddleOne, this.paddleTwo);
-    this.ballThree.render(svg, this.paddleOne, this.paddleTwo);
+	this.ballThree.render(svg, this.paddleOne, this.paddleTwo);
+	this.shoot.render(svg,this.paddleOne, this.paddleTwo);
 
-    if (this.paddleOne.score === 4 || this.paddleTwo.score === 4) {
+    if (this.paddleOne.score === 15) {
       this.paddleOne.score = 0;
       this.paddleTwo.score = 0;
       this.pause = true;
-      if (this.paddleOne.score === 4) {
-        this.winner.render(svg);
-        this.Restart.render(svg);
-      } else {
-        this.winner2.render(svg);
-        this.Restart.render(svg);
-      }
+
+      this.winner.render(svg);
+      this.Restart.render(svg);
+    } else if (this.paddleTwo.score === 15) {
+      this.paddleOne.score = 0;
+      this.paddleTwo.score = 0;
+      this.pause = true;
+      this.winner2.render(svg);
+      this.Restart.render(svg);
+    } else {
+    //   console.log('');
     }
 
+    // if (this.paddleOne.score === 3) {
+    //   this.paddleOne.increasHeight()
+    // }else if (this.paddleTwo.score === 3){
+    //   this.paddleTwo.increasHeight()
+    // }
     this.score1.render(svg, this.paddleOne.score);
     this.score2.render(svg, this.paddleTwo.score);
   }
