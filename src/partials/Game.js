@@ -23,8 +23,9 @@ export default class Game {
     this.board = new Board(this.width, this.height);
     //bal instantiator
     this.ball = new Ball(this.radius, this.width, this.height);
-    this.ballThree = new Ball(this.radius, this.width, this.height);
     this.ballTwo = new Ball(this.radius, this.width, this.height);
+    this.ballThree = new Ball(this.radius, this.width, this.height);
+    
 
     this.paddleOne = new Paddle(
       this.height,
@@ -47,9 +48,9 @@ export default class Game {
     );
 
     this.score1 = new Score(this.width / 4, 30, this.scoreFontSize);
-	this.score2 = new Score(3 * (this.width / 4), 30, this.scoreFontSize);
-	this.shoot = new Shoot(12, KEYS.s, KEYS.w, this.paddleOne, this.paddleTwo)
-	
+    this.score2 = new Score(3 * (this.width / 4), 30, this.scoreFontSize);
+    this.shoot = new Shoot(12, KEYS.s, KEYS.w, this.paddleOne, this.paddleTwo);
+
     this.winner = new Winner(
       120,
       this.height / 2 - 40,
@@ -92,10 +93,10 @@ export default class Game {
     this.board.render(svg);
     this.paddleOne.render(svg, this.paddleTwo);
     this.paddleTwo.render(svg, this.paddleOne);
-    this.ball.render(svg, this.paddleOne, this.paddleTwo);
-    this.ballTwo.render(svg, this.paddleOne, this.paddleTwo);
-	this.ballThree.render(svg, this.paddleOne, this.paddleTwo);
-	this.shoot.render(svg,this.paddleOne, this.paddleTwo);
+    this.ball.render(svg, this.paddleOne, this.paddleTwo,'white');
+    this.ballTwo.render(svg, this.paddleOne, this.paddleTwo,'white');
+    
+    this.shoot.render(svg, this.paddleOne, this.paddleTwo);
 
     if (this.paddleOne.score === 15) {
       this.paddleOne.score = 0;
@@ -111,14 +112,18 @@ export default class Game {
       this.winner2.render(svg);
       this.Restart.render(svg);
     } else {
-    //   console.log('');
     }
 
-    // if (this.paddleOne.score === 3) {
-    //   this.paddleOne.increasHeight()
-    // }else if (this.paddleTwo.score === 3){
-    //   this.paddleTwo.increasHeight()
-    // }
+    if (this.paddleOne.score === 5) {
+      this.paddleOne.height = 80;
+    } else if (this.paddleTwo.score === 5) {
+      this.paddleTwo.height = 80;
+    }else {
+
+    }
+    if (this.paddleOne.score >= 10 || this.paddleTwo.score >= 10) {
+      this.ballThree.render(svg, this.paddleOne, this.paddleTwo,'green');
+    }
     this.score1.render(svg, this.paddleOne.score);
     this.score2.render(svg, this.paddleTwo.score);
   }

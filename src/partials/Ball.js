@@ -75,12 +75,12 @@ export class Ball {
     this.vx = this.direction * (6 - Math.abs(this.vy));
   }
 
-  render(svg, paddle1, paddle2 ) {
+  render(svg, paddle1, paddle2,color ) {
     let circle = document.createElementNS(SVG_NS, 'circle');
     circle.setAttributeNS(null, 'r', this.radius);
     circle.setAttributeNS(null, 'cx', this.x);
     circle.setAttributeNS(null, 'cy', this.y);
-    circle.setAttributeNS(null, 'fill', 'white');
+    circle.setAttributeNS(null, 'fill', color);
     this.wallCollision(paddle1, paddle2);
     this.x += this.vx;
     this.y += this.vy;

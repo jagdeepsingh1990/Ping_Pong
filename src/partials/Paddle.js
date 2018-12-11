@@ -1,4 +1,4 @@
-import { SVG_NS, KEYS } from '../settings';
+import { SVG_NS } from '../settings';
 
 export class Paddle {
   constructor(boardHeight, width, height, x, y, up, down) {
@@ -13,8 +13,6 @@ export class Paddle {
     this.score = 0;
 
     document.addEventListener('keydown', event => {
-      
-
       switch (event.key) {
         case this.up:
           this.y = Math.max(10, this.y - this.speed);
@@ -28,11 +26,6 @@ export class Paddle {
       }
     });
   }
-
-increasHeight(){
-  this.height += 10;
-}
-
   coordinates() {
     const leftX = this.x;
     const rightX = this.x + this.width;
